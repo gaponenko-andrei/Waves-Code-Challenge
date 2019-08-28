@@ -1,4 +1,4 @@
-package reading
+package waves.reading
 
 import scala.io.Source
 

@@ -1,4 +1,4 @@
-package vo
+package waves.vo
 
 case class Client(
   name: String,

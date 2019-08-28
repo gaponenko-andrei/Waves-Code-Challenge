@@ -1,7 +1,7 @@
-package reading
+package waves.reading
 
 import org.scalatest.{FlatSpec, GivenWhenThen, Inside, Matchers}
-import vo.{Buy, Sell}
+import waves.vo.{Buy, Sell}
 
 class OrdersFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen with Inside {
 
@@ -13,7 +13,7 @@ class OrdersFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen wi
     Then("exception should be thrown")
     an[IllegalArgumentException] shouldBe thrownBy {
 
-      When("reading is applied to file path")
+      When("waves.reading is applied to file path")
       OrdersFileReading(resourceFilePath)
     }
   }
@@ -23,7 +23,7 @@ class OrdersFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen wi
     Given("an existing & valid resource file")
     val resourceFilePath = "/test-orders.txt"
 
-    When("reading is applied to file path")
+    When("waves.reading is applied to file path")
     val orders = OrdersFileReading(resourceFilePath)
 
     Then("result should hold expected orders")

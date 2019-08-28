@@ -1,7 +1,7 @@
-package reading
+package waves.reading
 
-import reading.PackageUtils.readLinesFrom
-import vo._
+import waves.reading.PackageUtils.readLinesFrom
+import waves.vo._
 
 object OrdersFileReading extends (String => Iterator[Order]) {
 
@@ -15,17 +15,17 @@ object OrdersFileReading extends (String => Iterator[Order]) {
     seq(1) match {
       case "s" => Sell(
         id = id,
-        clientName = seq(0),
-        paperType = seq(2),
-        paperPrice = seq(3).toInt,
-        papersCount = seq(4).toInt
+        client = seq(0),
+        paper = seq(2),
+        price = seq(3).toInt,
+        count = seq(4).toInt
       )
       case "b" => Buy(
         id = id,
-        clientName = seq(0),
-        paperType = seq(2),
-        paperPrice = seq(3).toInt,
-        papersCount = seq(4).toInt
+        client = seq(0),
+        paper = seq(2),
+        price = seq(3).toInt,
+        count = seq(4).toInt
       )
     }
   }

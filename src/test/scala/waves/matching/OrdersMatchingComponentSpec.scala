@@ -1,7 +1,7 @@
-package matching
+package waves.matching
 
 import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
-import vo.{Buy, Sell}
+import waves.vo.{Buy, Sell}
 
 /* This is a test for 'OrdersMatching' working with (using) an actual implementation of
   'OrdersPairMatching', instead of test implementations we used in 'OrdersMatchingSpec' */
@@ -13,7 +13,7 @@ class OrdersMatchingComponentSpec extends FlatSpec with Matchers with GivenWhenT
     Given("default orders matching")
     val matching = new OrdersMatching()
 
-    When("matching is applied to some orders")
+    When("waves.matching is applied to some orders")
     val matches = matching(List(
       Sell(0, "C1", "A", 10, 20), Buy(1, "C2", "A", 10, 20),
       Sell(2, "C2", "B", 15, 15), Buy(3, "C3", "B", 15, 15),

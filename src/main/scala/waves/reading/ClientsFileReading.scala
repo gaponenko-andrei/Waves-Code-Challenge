@@ -1,7 +1,7 @@
-package reading
+package waves.reading
 
-import reading.PackageUtils.readLinesFrom
-import vo._
+import waves.reading.PackageUtils.readLinesFrom
+import waves.vo._
 
 object ClientsFileReading extends (String => Set[Client]) {
 

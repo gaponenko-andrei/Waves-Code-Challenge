@@ -1,6 +1,6 @@
-package matching
+package waves.matching
 
-import vo.{Buy, Order, Sell}
+import waves.vo.{Buy, Order, Sell}
 
 class OrdersMatching(pairMatching: OrdersPairMatching = OrdersPairMatching) extends (List[Order] => List[Match]) {
 
@@ -23,13 +23,13 @@ class OrdersMatching(pairMatching: OrdersPairMatching = OrdersPairMatching) exte
     val unmatchedBuys = buys.toBuffer
     for {
       sell <- sells
-      (_, buy) <- findFirstMatchBetween(sell, unmatchedBuys)
+      Match(_, buy) <- findFirstMatchBetween(sell, unmatchedBuys)
     } yield {
       unmatchedBuys -= buy
-      (sell, buy)
+      Match(sell, buy)
     }
   }
 
   private def findFirstMatchBetween(sell: Sell, buys: Iterable[Buy]): Option[Match] =
-    buys collectFirst { case buy if pairMatching(sell, buy).isDefined => sell -> buy }
+    buys collectFirst { case buy if pairMatching(sell, buy).isDefined => Match(sell, buy) }
 }
