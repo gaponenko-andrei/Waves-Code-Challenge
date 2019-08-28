@@ -1,20 +1,12 @@
 package reading
 
-import org.scalactic.{Bad, Good, Or}
 import reading.PackageUtils.readLinesFrom
 import vo._
 
-object ClientsFileReading extends (String => Iterator[Client] Or Exception) {
+object ClientsFileReading extends (String => Set[Client]) {
 
-  override def apply(resourcePath: String): Iterator[Client] Or Exception =
-    try {
-      Good(readClientsFrom(resourcePath))
-    } catch {
-      case ex: Exception => Bad(ex)
-    }
-
-  private def readClientsFrom(resourcePath: String): Iterator[Client] =
-    readLinesFrom(resourcePath) map line2Client
+  override def apply(resourcePath: String): Set[Client] =
+    readLinesFrom(resourcePath).map(line2Client).toSet
 
   private def line2Client(line: String): Client = {
     val seq = line.split("[\\t]").toIndexedSeq

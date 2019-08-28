@@ -1,19 +1,11 @@
 package reading
 
-import org.scalactic.{Bad, Good, Or}
 import reading.PackageUtils.readLinesFrom
 import vo._
 
-object OrdersFileReading extends (String => Iterator[Order] Or Exception) {
+object OrdersFileReading extends (String => Iterator[Order]) {
 
-  override def apply(resourcePath: String): Iterator[Order] Or Exception =
-    try {
-      Good(readOrdersFrom(resourcePath))
-    } catch {
-      case ex: Exception => Bad(ex)
-    }
-
-  private def readOrdersFrom(resourcePath: String): Iterator[Order] =
+  override def apply(resourcePath: String): Iterator[Order] =
     readLinesFrom(resourcePath).zipWithIndex map {
       case (line, id) => newOrderFrom(id, line)
     }
