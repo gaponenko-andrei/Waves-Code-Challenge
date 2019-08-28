@@ -1,11 +1,11 @@
 package matching
 
-import org.scalatest.{FlatSpec, GivenWhenThen, Inside, Matchers}
+import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
 import vo.{Buy, Sell}
 
 import scala.util.Random
 
-class OrdersMatchingSpec extends FlatSpec with Matchers with GivenWhenThen with Inside {
+class OrdersMatchingSpec extends FlatSpec with Matchers with GivenWhenThen {
 
   "OrdersMatching" should "return a list of matches" in {
 
@@ -57,10 +57,8 @@ class OrdersMatchingSpec extends FlatSpec with Matchers with GivenWhenThen with 
 
     When("matching is applied to list of 4 sell & buy orders")
     val matches = matching(List(
-      someSellOrder, someSellOrder,
-      someSellOrder, someSellOrder,
-      someBuyOrder, someBuyOrder,
-      someBuyOrder, someBuyOrder
+      someSellOrder, someSellOrder, someSellOrder, someSellOrder,
+      someBuyOrder, someBuyOrder, someBuyOrder, someBuyOrder
     ))
 
     Then("result should have 4 matches")
@@ -77,10 +75,8 @@ class OrdersMatchingSpec extends FlatSpec with Matchers with GivenWhenThen with 
 
     When("matching is applied to list of 4 sell & buy orders")
     val matches = matching(List(
-      someSellOrder, someSellOrder,
-      someSellOrder, someSellOrder,
-      someBuyOrder, someBuyOrder,
-      someBuyOrder, someBuyOrder
+      someSellOrder, someSellOrder, someSellOrder, someSellOrder,
+      someBuyOrder, someBuyOrder, someBuyOrder, someBuyOrder
     ))
 
     Then("result should be empty")
