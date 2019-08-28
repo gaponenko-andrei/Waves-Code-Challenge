@@ -1,18 +1,18 @@
-package reader
+package reading
 
 import org.scalactic.{Bad, Good}
 import org.scalatest.{FlatSpec, GivenWhenThen, Inside, Matchers}
 import vo.Client
 
-class ClientsFileReaderSpec extends FlatSpec with Matchers with GivenWhenThen with Inside {
+class ClientsFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen with Inside {
 
-  "ClientFileReader" should "return exception when something went wrong" in {
+  "ClientFileReading" should "return exception when something went wrong" in {
 
     Given("some non-existing resource file")
     val resourceFilePath = "non-existing-file.txt"
 
-    When("reader is applied to file path")
-    val result = ClientsFileReader(resourceFilePath)
+    When("reading is applied to file path")
+    val result = ClientsFileReading(resourceFilePath)
 
     Then("result should hold an exception")
     result should matchPattern { case Bad(_: Exception) => }
@@ -23,8 +23,8 @@ class ClientsFileReaderSpec extends FlatSpec with Matchers with GivenWhenThen wi
     Given("an existing & valid resource file")
     val resourceFilePath = "/test-clients.txt"
 
-    When("reader is applied to file path")
-    val result = ClientsFileReader(resourceFilePath)
+    When("reading is applied to file path")
+    val result = ClientsFileReading(resourceFilePath)
 
     Then("result should hold expected clients")
     inside(result) { case Good(clients) =>

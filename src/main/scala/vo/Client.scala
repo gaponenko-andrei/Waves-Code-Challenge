@@ -6,4 +6,5 @@ case class Client(
   aPapersCount: Int,
   bPapersCount: Int,
   cPapersCount: Int,
-  dPapersCount: Int)
+  dPapersCount: Int
+)
