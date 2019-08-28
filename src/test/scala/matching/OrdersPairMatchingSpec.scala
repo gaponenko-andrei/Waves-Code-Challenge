@@ -44,19 +44,6 @@ class OrdersPairMatchingSpec extends FlatSpec with Matchers with GivenWhenThen {
     result shouldBe None
   }
 
-  it should "return None when orders almost match, but have the same type" in {
-
-    Given("non-matching pair of orders")
-    val order1 = Sell(0, "C1", "A", 15, 20)
-    val order2 = Sell(1, "C2", "A", 15, 20)
-
-    When("matching is applied")
-    val result = OrdersPairMatching(order1, order2)
-
-    Then("result should be None")
-    result shouldBe None
-  }
-
   it should "return None when orders almost match, but papers are different" in {
 
     Given("non-matching pair of orders")
