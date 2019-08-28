@@ -5,16 +5,16 @@ import vo.{Buy, Order, Sell}
 class OrdersMatching(pairMatching: OrdersPairMatching = OrdersPairMatching) extends (List[Order] => List[Match]) {
 
   override def apply(orders: List[Order]): List[Match] = {
-    val (sellOrders, buyOrders) = separate(orders)
-    performMatchingBetween(sellOrders, buyOrders)
+    val (sells, buys) = separate(orders)
+    performMatchingBetween(sells, buys)
   }
 
   private def separate(orders: List[Order]): (List[Sell], List[Buy]) = {
     val zeroOrders: (List[Sell], List[Buy]) = (Nil, Nil)
     orders.foldRight(zeroOrders) {
-      case (order, (sellOrders, buyOrders)) => order match {
-        case sell: Sell => (sell :: sellOrders, buyOrders)
-        case buy: Buy => (sellOrders, buy :: buyOrders)
+      case (order, (sells, buys)) => order match {
+        case sell: Sell => (sell :: sells, buys)
+        case buy: Buy => (sells, buy :: buys)
       }
     }
   }
