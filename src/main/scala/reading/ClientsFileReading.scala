@@ -9,14 +9,16 @@ object ClientsFileReading extends (String => Set[Client]) {
     readLinesFrom(resourcePath).map(line2Client).toSet
 
   private def line2Client(line: String): Client = {
-    val seq = line.split("[\\t]").toIndexedSeq
+    val fields = line.split("[\\t]").toIndexedSeq
     Client(
-      name = seq(0),
-      balance = seq(1).toInt,
-      aPapersCount = seq(2).toInt,
-      bPapersCount = seq(3).toInt,
-      cPapersCount = seq(4).toInt,
-      dPapersCount = seq(5).toInt
+      name = fields(0),
+      balance = fields(1).toInt,
+      papersCount = Map(
+        "A" -> fields(2).toInt,
+        "B" -> fields(3).toInt,
+        "C" -> fields(4).toInt,
+        "D" -> fields(5).toInt
+      )
     )
   }
 }

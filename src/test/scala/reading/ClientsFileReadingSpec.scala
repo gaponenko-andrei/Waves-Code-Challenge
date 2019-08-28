@@ -28,10 +28,10 @@ class ClientsFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen w
 
     Then("result should hold expected clients")
     clients shouldEqual Set(
-      Client("C1", 1000, 130, 240, 760, 320),
-      Client("C2", 4350, 370, 120, 950, 560),
-      Client("C3", 2760, 100, 200, 300, 400),
-      Client("C4", 5600, 450, 540, 480, 950)
+      Client("C1", 1000, Map("A" -> 130, "B" -> 240, "C" -> 760, "D" -> 320)),
+      Client("C2", 4350, Map("A" -> 370, "B" -> 120, "C" -> 950, "D" -> 560)),
+      Client("C3", 2760, Map("A" -> 100, "B" -> 200, "C" -> 300, "D" -> 400)),
+      Client("C4", 5600, Map("A" -> 450, "B" -> 540, "C" -> 480, "D" -> 950))
     )
   }
 }
