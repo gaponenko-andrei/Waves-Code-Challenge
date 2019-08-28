@@ -20,13 +20,21 @@ object OrdersFileReading extends (String => Iterator[Order] Or Exception) {
 
   private def newOrderFrom(id: Int, orderLine: String): Order = {
     val seq = orderLine.split("[\\t]").toIndexedSeq
-    Order(
-      id = id,
-      clientName = seq(0),
-      operation = seq(1),
-      paperType = seq(2),
-      paperPrice = seq(3).toInt,
-      papersCount = seq(4).toInt
-    )
+    seq(1) match {
+      case "s" => Sell(
+        id = id,
+        clientName = seq(0),
+        paperType = seq(2),
+        paperPrice = seq(3).toInt,
+        papersCount = seq(4).toInt
+      )
+      case "b" => Buy(
+        id = id,
+        clientName = seq(0),
+        paperType = seq(2),
+        paperPrice = seq(3).toInt,
+        papersCount = seq(4).toInt
+      )
+    }
   }
 }

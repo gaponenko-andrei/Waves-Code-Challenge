@@ -2,7 +2,7 @@ package reading
 
 import org.scalactic.{Bad, Good}
 import org.scalatest.{FlatSpec, GivenWhenThen, Inside, Matchers}
-import vo.Order
+import vo.{Buy, Sell}
 
 class OrdersFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen with Inside {
 
@@ -29,11 +29,10 @@ class OrdersFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen wi
     Then("result should hold expected orders")
     inside(result) { case Good(orders) =>
       orders.toList shouldEqual List(
-        Order(0, "C8", "b", "C", 15, 4),
-        Order(1, "C2", "s", "C", 14, 5),
-        Order(2, "C2", "s", "C", 13, 2),
-        Order(3, "C9", "b", "B", 16, 4)
-      )
+        Buy(0, "C8", "C", 15, 4),
+        Sell(1, "C2", "C", 14, 5),
+        Sell(2, "C2", "C", 13, 2),
+        Buy(3, "C9", "B", 16, 4))
     }
   }
 }

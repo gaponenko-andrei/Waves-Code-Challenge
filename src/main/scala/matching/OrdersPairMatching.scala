@@ -14,7 +14,7 @@ object OrdersPairMatching extends OrdersPairMatching {
 
     if (ordersHaveDifferentValueFor(_.id) &&
         ordersHaveDifferentValueFor(_.clientName) &&
-        ordersHaveDifferentValueFor(_.operation) &&
+        ordersHaveDifferentValueFor(_.getClass) &&
         ordersHaveEqualValueFor(_.paperType) &&
         ordersHaveEqualValueFor(_.paperPrice) &&
         ordersHaveEqualValueFor(_.papersCount))
