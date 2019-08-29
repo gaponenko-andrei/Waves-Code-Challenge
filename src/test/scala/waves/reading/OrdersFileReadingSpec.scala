@@ -27,7 +27,7 @@ class OrdersFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen wi
     val orders = OrdersFileReading(resourceFilePath)
 
     Then("result should hold expected orders")
-    orders.toList shouldEqual List(
+    orders shouldEqual List(
       Buy("C8", "C", 15, 4),
       Sell("C2", "C", 14, 5),
       Sell("C2", "C", 13, 2),

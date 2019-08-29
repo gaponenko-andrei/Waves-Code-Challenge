@@ -3,10 +3,10 @@ package waves.reading
 import waves.reading.PackageUtils.readLinesFrom
 import waves.vo._
 
-object OrdersFileReading extends (String => Iterator[Order]) {
+object OrdersFileReading extends (String => List[Order]) {
 
-  override def apply(resourcePath: String): Iterator[Order] =
-    readLinesFrom(resourcePath) map line2Order
+  override def apply(resourcePath: String): List[Order] =
+    readLinesFrom(resourcePath).map(line2Order).toList
 
   private def line2Order(line: String): Order = {
     val seq = line.split("[\\t]").toIndexedSeq

@@ -28,11 +28,13 @@ object MatchingOrdersProcessing {
     }
 
   private def applyMatch(`match`: Match, clients: Clients): Clients = {
+
     def applyOrder(order: Order, clients: Clients): Clients = {
       val ownerBeforeApplication: Client = findOrderOwner(order, clients)
       val ownerAfterApplication: Client = order(ownerBeforeApplication)
       clients - ownerBeforeApplication + ownerAfterApplication
     }
+
     val clientsAfterSell = applyOrder(`match`.sell, clients)
     applyOrder(`match`.buy, clientsAfterSell)
   }
