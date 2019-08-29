@@ -5,11 +5,11 @@ sealed trait Order {
   def paper: String
   def price: Int
   def count: Int
-  def processFor(owner: Client): Client
+  def apply(owner: Client): Client
 }
 
 final case class Sell(client: String, paper: String, price: Int, count: Int) extends Order {
-  override def processFor(owner: Client): Client = {
+  override def apply(owner: Client): Client = {
     require(owner.name == client)
     owner copy(
       balance = owner.balance + price * count,
@@ -23,7 +23,7 @@ final case class Sell(client: String, paper: String, price: Int, count: Int) ext
 }
 
 final case class Buy(client: String, paper: String, price: Int, count: Int) extends Order {
-  override def processFor(owner: Client): Client = {
+  override def apply(owner: Client): Client = {
     require(owner.name == client)
     owner copy(
       balance = owner.balance - price * count,

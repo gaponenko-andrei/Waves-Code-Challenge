@@ -1,7 +1,7 @@
 package waves
 
 import waves.matching.Match
-import waves.vo.{Buy, Client, Order, Sell}
+import waves.vo.{Client, Order}
 
 import scala.annotation.tailrec
 import scala.collection._
@@ -11,32 +11,30 @@ object MatchingOrdersProcessing {
   private type Clients = Set[Client]
   private type Matches = List[Match]
 
-  def apply(clients: Clients, orders: Match): immutable.Set[Client] =
-    processMatch(orders, mutableSetOf(clients)).toSet
+  def apply(clients: Clients, `match`: Match): immutable.Set[Client] =
+    applyMatch(`match`, asMutableSet(clients)).toSet
 
-  def apply(clients: Clients, orders: Matches): immutable.Set[Client] =
-    processMatches(orders, mutableSetOf(clients)).toSet
+  def apply(clients: Clients, matches: Matches): immutable.Set[Client] =
+    applyMatches(matches, asMutableSet(clients)).toSet
 
-  private def mutableSetOf(clients: Clients): mutable.Set[Client] =
+  private def asMutableSet(clients: Clients): mutable.Set[Client] =
     mutable.Set.empty ++ clients
 
   @tailrec
-  private def processMatches(matches: Matches, clients: Clients): Clients =
+  private def applyMatches(matches: Matches, clients: Clients): Clients =
     if (matches.isEmpty) clients else {
-      val clientsAfterProcessing = processMatch(matches.head, clients)
-      processMatches(matches.tail, clientsAfterProcessing)
+      val afterProcessing: Clients = applyMatch(matches.head, clients)
+      applyMatches(matches = matches.tail, clients = afterProcessing)
     }
 
-  private def processMatch(orders: Match, clients: Clients): Clients = {
-
-    def process(order: Order, clients: Clients): Clients = {
-      val ownerBefore: Client = findOrderOwner(order, clients)
-      val ownerAfter: Client = order processFor ownerBefore
-      clients - ownerBefore + ownerAfter
+  private def applyMatch(`match`: Match, clients: Clients): Clients = {
+    def applyOrder(order: Order, clients: Clients): Clients = {
+      val ownerBeforeApplication: Client = findOrderOwner(order, clients)
+      val ownerAfterApplication: Client = order(ownerBeforeApplication)
+      clients - ownerBeforeApplication + ownerAfterApplication
     }
-
-    val clientsAfterSell = process(orders.sell, clients)
-    process(orders.buy, clientsAfterSell)
+    val clientsAfterSell = applyOrder(`match`.sell, clients)
+    applyOrder(`match`.buy, clientsAfterSell)
   }
 
   private def findOrderOwner(order: Order, clients: Set[Client]): Client =
