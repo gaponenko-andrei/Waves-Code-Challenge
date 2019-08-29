@@ -4,13 +4,18 @@ import waves.vo.{Buy, Order, Sell}
 
 class OrdersMatching(pairMatching: OrdersPairMatching = OrdersPairMatching) extends (List[Order] => List[Match]) {
 
-  override def apply(orders: List[Order]): List[Match] = {
+  private type Matches = List[Match]
+  private type Orders = List[Order]
+  private type Sells = List[Sell]
+  private type Buys = List[Buy]
+
+  override def apply(orders: Orders): Matches = {
     val (sells, buys) = separate(orders)
     performMatchingBetween(sells, buys)
   }
 
-  private def separate(orders: List[Order]): (List[Sell], List[Buy]) = {
-    val zeroOrders: (List[Sell], List[Buy]) = (Nil, Nil)
+  private def separate(orders: Orders): (Sells, Buys) = {
+    val zeroOrders: (Sells, Buys) = (Nil, Nil)
     orders.foldRight(zeroOrders) {
       case (order, (sells, buys)) => order match {
         case sell: Sell => (sell :: sells, buys)
@@ -19,7 +24,7 @@ class OrdersMatching(pairMatching: OrdersPairMatching = OrdersPairMatching) exte
     }
   }
 
-  private def performMatchingBetween(sells: List[Sell], buys: List[Buy]): List[Match] = {
+  private def performMatchingBetween(sells: Sells, buys: Buys): Matches = {
     val unmatchedBuys = buys.toBuffer
     for {
       sell <- sells
