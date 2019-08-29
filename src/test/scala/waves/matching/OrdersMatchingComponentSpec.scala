@@ -15,17 +15,17 @@ class OrdersMatchingComponentSpec extends FlatSpec with Matchers with GivenWhenT
 
     When("waves.matching is applied to some orders")
     val matches = matching(List(
-      Sell(0, "C1", "A", 10, 20), Buy(1, "C2", "A", 10, 20),
-      Sell(2, "C2", "B", 15, 15), Buy(3, "C3", "B", 15, 15),
-      Sell(4, "C3", "C", 10, 10), Sell(5, "C3", "C", 10, 10),
-      Buy(6, "C3", "D", 40, 40), Sell(7, "C4", "D", 40, 40)
+      Sell("C1", "A", 10, 20), Buy("C2", "A", 10, 20),
+      Sell("C2", "B", 15, 15), Buy("C3", "B", 15, 15),
+      Sell("C3", "C", 10, 10), Sell("C3", "C", 10, 10),
+      Buy("C3", "D", 40, 40), Sell("C4", "D", 40, 40)
     ))
 
     Then("result should be expected")
     matches shouldEqual List(
-      Sell(0, "C1", "A", 10, 20) -> Buy(1, "C2", "A", 10, 20),
-      Sell(2, "C2", "B", 15, 15) -> Buy(3, "C3", "B", 15, 15),
-      Sell(7, "C4", "D", 40, 40) -> Buy(6, "C3", "D", 40, 40)
+      Sell("C1", "A", 10, 20) -> Buy("C2", "A", 10, 20),
+      Sell("C2", "B", 15, 15) -> Buy("C3", "B", 15, 15),
+      Sell("C4", "D", 40, 40) -> Buy("C3", "D", 40, 40)
     )
   }
 }

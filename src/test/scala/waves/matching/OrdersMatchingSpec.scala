@@ -136,21 +136,9 @@ class OrdersMatchingSpec extends FlatSpec with Matchers with GivenWhenThen {
 
   // Utils
 
-  private def someBuyOrder = Buy(
-    id = anyInt,
-    client = "_",
-    paper = "_",
-    price = anyInt,
-    count = anyInt
-  )
+  private def someBuyOrder = Buy(client = "_", paper = "_", price = anyInt, count = anyInt)
 
-  private def someSellOrder = Sell(
-    id = anyInt,
-    client = "_",
-    paper = "_",
-    price = anyInt,
-    count = anyInt
-  )
+  private def someSellOrder = Sell(client = "_", paper = "_", price = anyInt, count = anyInt)
 
   private def anyInt: Int = Random.nextInt()
 }

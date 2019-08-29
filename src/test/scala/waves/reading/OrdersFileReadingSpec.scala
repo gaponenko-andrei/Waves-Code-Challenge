@@ -28,10 +28,10 @@ class OrdersFileReadingSpec extends FlatSpec with Matchers with GivenWhenThen wi
 
     Then("result should hold expected orders")
     orders.toList shouldEqual List(
-      Buy(0, "C8", "C", 15, 4),
-      Sell(1, "C2", "C", 14, 5),
-      Sell(2, "C2", "C", 13, 2),
-      Buy(3, "C9", "B", 16, 4)
+      Buy("C8", "C", 15, 4),
+      Sell("C2", "C", 14, 5),
+      Sell("C2", "C", 13, 2),
+      Buy("C9", "B", 16, 4)
     )
   }
 }

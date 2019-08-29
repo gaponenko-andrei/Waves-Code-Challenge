@@ -16,7 +16,7 @@ class MatchingOrdersProcessingSpec extends FlatSpec with Matchers with GivenWhen
     )
 
     And("pair of matching orders")
-    val orders = Match(Sell(1, "C1", "A", 15, 20), Buy(2, "C2", "A", 15, 20))
+    val orders = Match(Sell("C1", "A", 15, 20), Buy("C2", "A", 15, 20))
 
     When("processing is applied")
     val result = MatchingOrdersProcessing(clients, orders)
@@ -39,8 +39,8 @@ class MatchingOrdersProcessingSpec extends FlatSpec with Matchers with GivenWhen
 
     And("pairs of matching orders")
     val orders = List(
-      Match(Sell(1, "C1", "B", 15, 20), Buy(2, "C2", "B", 15, 20)),
-      Match(Sell(3, "C2", "C", 10, 20), Buy(4, "C3", "C", 10, 20))
+      Match(Sell("C1", "B", 15, 20), Buy("C2", "B", 15, 20)),
+      Match(Sell("C2", "C", 10, 20), Buy("C3", "C", 10, 20))
     )
 
     When("processing is applied")
@@ -63,7 +63,7 @@ class MatchingOrdersProcessingSpec extends FlatSpec with Matchers with GivenWhen
     )
 
     And("pair of matching orders, not related to clients")
-    val orders = Match(Sell(1, "C1", "A", 15, 20), Buy(2, "C2", "A", 15, 20))
+    val orders = Match(Sell("C1", "A", 15, 20), Buy("C2", "A", 15, 20))
 
     Then("exception should be thrown")
     an[NoSuchElementException] shouldBe thrownBy {

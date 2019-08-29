@@ -17,7 +17,6 @@ object OrdersPairMatching extends OrdersPairMatching {
     val ordersHaveEqualValueFor = haveEqualFieldValue(s, b)(_)
     val ordersHaveDifferentValueFor = haveDifferentFieldValue(s, b)(_)
 
-    ordersHaveDifferentValueFor(_.id) &&
     ordersHaveDifferentValueFor(_.client) &&
     ordersHaveEqualValueFor(_.paper) &&
     ordersHaveEqualValueFor(_.price) &&
