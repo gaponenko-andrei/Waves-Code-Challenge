@@ -15,7 +15,7 @@ class OrdersPairMatchingSpec extends FlatSpec with Matchers with GivenWhenThen {
     val result = OrdersPairMatching(sell, buy)
 
     Then("result should be Some pair of matched orders")
-    result shouldBe Some(sell -> buy)
+    result shouldBe Some(Match(sell, buy))
   }
 
   it should "return None when orders almost match, but have the same client" in {

@@ -24,7 +24,7 @@ class OrdersMatchingSpec extends FlatSpec with Matchers with GivenWhenThen {
     val matches = matching(orders)
 
     Then("result should be expected")
-    matches shouldBe List(sell -> buy)
+    matches shouldBe List(Match(sell, buy))
   }
 
   it should "match orders based on their positions in a given list" in {
@@ -44,7 +44,7 @@ class OrdersMatchingSpec extends FlatSpec with Matchers with GivenWhenThen {
     val matches = matching(orders)
 
     Then("result should be expected")
-    matches shouldBe List(s3 -> b1, s4 -> b3, s2 -> b2, s1 -> b4)
+    matches shouldBe List(Match(s3, b1), Match(s4, b3), Match(s2, b2), Match(s1, b4))
   }
 
   it should "return an expected number of matches" in {
